@@ -12,7 +12,31 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+app.post('/donate', cors(), async (request, response) =>{
+    let { amount, id } = req.body
 
+    try {
+        // async function straight from stripe api to get payment info/object
+        const payment = await stripe.paymentIntents.create({
+            amount,
+            currency: "USD",
+            description: "Donation to online charity board",
+            payment_method: id,
+            confirm: true
+        })
+        console.log("Payment", payment)
+        response.json({
+            message: "Payment successful",
+            success: true
+        })
+    } catch (error) {
+        console.log("Error", error)
+        response.json({
+            message: "Payment failed",
+            success: false
+        })
+    }
+})
 
 
 
