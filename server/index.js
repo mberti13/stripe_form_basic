@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.post('/donate', cors(), async (request, response) =>{
+app.post('/donate', cors(), async (req, response) =>{
     let { amount, id } = req.body
 
     try {
@@ -36,10 +36,10 @@ app.post('/donate', cors(), async (request, response) =>{
             success: false
         })
     }
-})
+});
 
 
 
-app.listen(process.env.PORT || 4000, () =>{
-    console.log("Server is online on port 4000")
+app.listen(process.env.PORT || 3001, () =>{
+    console.log("Server is online on port 3001")
 });
